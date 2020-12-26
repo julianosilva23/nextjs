@@ -1,18 +1,9 @@
-import { getContent } from "../_api/content/slug";
-import { getContents } from "../_api/contents";
-import { useRouter } from 'next/router'
-import styles from '../../styles/Content.module.css'
+import { getContent } from "../../src/_api/content/slug";
+import { getContents } from "../../src/_api/contents";
+import styles from '../../styles/Content.module.css';
 
 
 export default function Content({content}) {
-
-    const router = useRouter()
-
-    // If the page is not yet generated, this will be displayed
-    // initially until getStaticProps() finishes running
-    if (router.isFallback) {
-      return <div>Loading...</div>
-    }
 
     return (
         <main className={styles.main}>
@@ -37,7 +28,7 @@ export async function getStaticPaths() {
 
     return {
       paths,
-      fallback: true,
+      fallback: false,
     }
 }
 

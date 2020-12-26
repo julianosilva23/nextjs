@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
-import { getContents } from './api/contents';
+import { getContents } from '../src/_api/contents';
 
 export default function  Home({ contents }) {
 
@@ -17,11 +17,12 @@ export default function  Home({ contents }) {
         </h1>
         <div className={styles.grid}>
         {
-          contents.map(function({ title, content, link }, i) {
+          contents.map(function({ title, body, slug }, i) {
+            slug = `content/${slug}`;
             return (
-              <a href={link} className={styles.card}>
+              <a href={slug} className={styles.card} key={i}>
                 <h3>{ title } &rarr;</h3>
-                <p>{ content.length <= 100 ? content : content.substring(0, 100) + '...' }</p>
+                <p>{ body.length <= 100 ? body : body.substring(0, 100) + '...' }</p>
               </a>
             );
           })
@@ -31,7 +32,7 @@ export default function  Home({ contents }) {
 
       <footer className={styles.footer}>
         <a
-          Link="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
+          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -46,12 +47,14 @@ export default function  Home({ contents }) {
 export async function getStaticProps(context) {
 
   const contents = await getContents();
+
   if (!contents) {
     return {
       notFound: true,
     }
   }
   return { 
-    props: { contents }
+    props: { contents },
+    revalidate: 5 * 60
   }
 }
