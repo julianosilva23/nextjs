@@ -1,6 +1,5 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import { GoogleSpreadsheet } from 'google-spreadsheet';
-import credentials from '../../../credentials/SiteDevJuliano-2324139317b0.json';
 
 export default async function handler(req, res) {
     const {
