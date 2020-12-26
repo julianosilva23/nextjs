@@ -24,9 +24,9 @@ export async function getContents() {
 
   const rows = await sheet.getRows();
 
-  const contents = rows.map(({ title, content }) => {
+  const contents = rows.map(({ title, body, slug }) => {
     return {
-      title, content
+      title, body, slug
     }
   })
 
