@@ -21,7 +21,6 @@ export default async function handler(req, res) {
 
     const contentObject = rows.find(content => content.slug === slug);
 
-
     if (!contentObject) {
         return {
           notFound: true,
