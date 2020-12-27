@@ -5,7 +5,7 @@ import { useRouter } from 'next/router'
 
 
 
-export default function Content({content}) {
+export default function Random({content}) {
 
   const router = useRouter()
 
@@ -18,10 +18,11 @@ export default function Content({content}) {
   return (
       <main className={styles.main}>
           <div className={styles.grid}>
-              <div className={styles.card}>
-                  <h3>{  content.title } &rarr;</h3>
-                  <p>{ content.body }</p>
-              </div>
+            <a href="/personal" className={styles.card}>&larr;</a>
+            <div className={styles.card}>
+                <h3>{  content.title } &rarr;</h3>
+                <p>{ content.body }</p>
+            </div>
           </div>
     </main>
   )
@@ -29,7 +30,7 @@ export default function Content({content}) {
 
 export async function getStaticPaths() {
 
-    const contents = await getContents();
+    const contents = await getContents(1);
 
     const paths = contents.map(({ slug }, id) => {
         return { params: { slug }}
@@ -43,7 +44,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
 
-    const content = await getContent(params.slug);
+    const content = await getContent(params.slug, 1);
 
     if (!content) {
       return {

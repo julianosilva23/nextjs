@@ -10,7 +10,7 @@ export default async (req, res) => {
   })
 }
 
-export async function getContents() {
+export async function getContents(index = 0) {
   const doc = new GoogleSpreadsheet('1yJEufrubZpYI6VH2LufjNJYWK2OtBXH3J14B9iRIyjY');
 
   await doc.useServiceAccountAuth({
@@ -20,7 +20,7 @@ export async function getContents() {
 
   await doc.loadInfo();
 
-  const sheet = doc.sheetsByIndex[0];
+  const sheet = doc.sheetsByIndex[index];
 
   const rows = await sheet.getRows();
 
