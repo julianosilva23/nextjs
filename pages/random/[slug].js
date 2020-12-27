@@ -18,7 +18,7 @@ export default function Random({content}) {
   return (
       <main className={styles.main}>
           <div className={styles.grid}>
-            <a href="/personal" className={styles.card}>&larr;</a>
+            <a href="/pessoal" className={styles.card}>&larr;</a>
             <div className={styles.card}>
                 <h3>{  content.title } &rarr;</h3>
                 <p>{ content.body }</p>
